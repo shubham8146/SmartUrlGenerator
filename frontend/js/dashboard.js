@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://smart-url-backend.onrender.com/api/';
 const token = localStorage.getItem('token');
 
 // Check if user is logged in
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 body: JSON.stringify({
                     originalUrl,
-                    customAlias: customAlias || undefined
+                    customAlias: customCode || undefined
                 })
             });
 

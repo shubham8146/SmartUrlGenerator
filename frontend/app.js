@@ -1,21 +1,24 @@
-const API = "http://localhost:5000/api";
+const API = "https://smart-url-backend.onrender.com/api";
 
 async function shorten() {
   const originalUrl = document.getElementById("urlInput").value;
   const customCode = document.getElementById("customCode").value;
   const expiryDate = document.getElementById("expiryDate").value;
 
-  const res = await fetch(`${API}/shorten`, {
+  const res = await fetch(`${API}/urls/create`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${localStorage.getItem('token')}`
+    },
     body: JSON.stringify({ originalUrl, customCode, expiryDate })
   });
 
   const data = await res.json();
 
   document.getElementById("result").innerHTML = `
-    <a href="${data.shortUrl}" target="_blank">${data.shortUrl}</a>
-    <button onclick="copyLink('${data.shortUrl}')">Copy</button>
+    <a href="${data.url.shortUrl}" target="_blank">${data.url.shortUrl}</a>
+<button onclick="copyLink('${data.url.shortUrl}')">Copy</button>
   `;
 
   fetchAll();
@@ -27,7 +30,11 @@ function copyLink(link) {
 }
 
 async function fetchAll() {
-  const res = await fetch(`${API}/all`);
+  const res = await fetch(`${API}/urls`, {
+    headers: {
+      "Authorization": `Bearer ${localStorage.getItem('token')}`
+    }
+  });
   const data = await res.json();
 
   const list = document.getElementById("list");
