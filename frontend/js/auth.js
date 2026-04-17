@@ -1,4 +1,4 @@
-const API_URL = 'https://smart-url-backend.onrender.com/api';
+const API_URL = 'http://localhost:5000/api';
 
 // Toggle between login and signup
 document.addEventListener('DOMContentLoaded', () => {

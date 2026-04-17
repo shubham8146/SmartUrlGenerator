@@ -1,4 +1,4 @@
-const API_URL = 'https://smart-url-backend.onrender.com/api/';
+const API_URL = 'http://localhost:5000/api';
 const token = localStorage.getItem('token');
 
 // Check if user is logged in
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 body: JSON.stringify({
                     originalUrl,
-                    customAlias: customCode || undefined
+                    customAlias: customAlias || undefined
                 })
             });
 
@@ -94,7 +94,7 @@ async function loadUrls() {
 }
 
 function copyToClipboard(shortCode) {
-    const shortUrl = `${window.location.origin}/${shortCode}`;
+    const shortUrl = `http://localhost:5000/${shortCode}`;
     navigator.clipboard.writeText(shortUrl).then(() => {
         showMessage('Copied to clipboard!', 'success');
     });
