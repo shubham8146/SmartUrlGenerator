@@ -1,4 +1,8 @@
-const API_URL = 'http://localhost:5000/api';
+// For production, change this to your Render URL
+// For local development, use localhost
+const API_URL = window.location.hostname === 'localhost'
+    ? 'http://localhost:5000/api'
+    : 'https://smart-url-backend.onrender.com/api';
 const token = localStorage.getItem('token');
 
 // Check if user is logged in
@@ -94,7 +98,10 @@ async function loadUrls() {
 }
 
 function copyToClipboard(shortCode) {
-    const shortUrl = `http://localhost:5000/${shortCode}`;
+    const baseUrl = window.location.hostname === 'localhost'
+        ? 'http://localhost:5000'
+        : 'https://smart-url-backend.onrender.com';
+    const shortUrl = `${baseUrl}/${shortCode}`;
     navigator.clipboard.writeText(shortUrl).then(() => {
         showMessage('Copied to clipboard!', 'success');
     });

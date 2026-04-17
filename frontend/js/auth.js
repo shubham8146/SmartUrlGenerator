@@ -1,4 +1,8 @@
-const API_URL = 'http://localhost:5000/api';
+// For production, change this to your Render URL
+// For local development, use localhost
+const API_URL = window.location.hostname === 'localhost'
+    ? 'http://localhost:5000/api'
+    : 'https://smart-url-backend.onrender.com/api';
 
 // Toggle between login and signup
 document.addEventListener('DOMContentLoaded', () => {
